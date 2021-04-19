@@ -1,0 +1,22 @@
+
+.fade-anim {
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: 0.6;}
+  to {opacity: 1;}
+}
+
+.popup-anim {
+  animation-name: popup;
+  animation-duration: 0.3s;
+}
+
+@keyframes popup {
+  0% {top: -300px;}
+  60% {top: 40px;}
+  100% {top: 0px;}
+}
+
