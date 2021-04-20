@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
-});
+
 
 
 // Открытие/закрытие модального окна.....
@@ -46,8 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const modal = document.querySelector('.modal'),
       modalContent = document.querySelector('.modal__content'),
-      openButton = document.querySelectorAll('[data-modal]'),
-      closeButton = document.querySelector('.modal__close');
+      openButton = document.querySelectorAll('[data-modal]');
 
 const openModal = function () {
   modal.classList.add('show');
@@ -69,10 +68,8 @@ const closeModal = function () {
   document.body.style.overflow = '';
 };
 
-closeButton.addEventListener('click', closeModal);
-
 modal.addEventListener('click', (evt) => {
-  if (evt.target === modal) {
+  if (evt.target === modal || evt.target.getAttribute('data-close') == '') {
     closeModal();
   }
 });
@@ -83,7 +80,7 @@ document.addEventListener('keydown', (evt) => {
   }
 });
 
-// const modalTimerId = setTimeout(openModal, 10000);
+const modalTimerId = setTimeout(openModal, 50000);
 
 function showModalByScroll () {
   if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
@@ -170,10 +167,86 @@ new MenuCard(
 ).render();
 
 
+// Формы.....
+
+const forms = document.querySelectorAll('form');
+
+const message = {
+  loading: 'img/form/spinner.svg',
+  success: 'Спасибо! Скоро мы с вами свяжемся',
+  failure: 'Что то пошло не так...',
+};
+
+forms.forEach(item => {
+  postData(item);
+});
+
+function postData(form) {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const statusMessage = document.createElement('img');
+    statusMessage.src = message.loading;
+    statusMessage.style.cssText = `
+      display: block;
+      margin: 0 auto;
+    `;
+    form.insertAdjacentElement('afterend', statusMessage);
+
+    const request = new XMLHttpRequest();
+    request.open('POST', 'server.php');
+    request.setRequestHeader('Content-type', 'application/json');
+    const formData = new FormData(form);
+
+    const object = {};
+    formData.forEach(function (value, key) {
+      object[key] = value;
+    });
+
+    request.send(JSON.stringify(object));
+
+    request.addEventListener('load', () => {
+      if (request.status === 200) {
+        console.log(request.response);
+        showThanksModal(message.success);
+        form.reset();
+        statusMessage.remove();
+      } else {
+        showThanksModal(message.failure);
+      }
+    });
+  });
+}
+
+function showThanksModal (message) {
+  const prevModalDialog = document.querySelector('.modal__dialog');
+  prevModalDialog.classList.add('hide');
+  openModal();
+
+  const thanksModal = document.createElement('div');
+  thanksModal.classList.add('modal__dialog');
+  thanksModal.innerHTML = `
+    <div class="modal__content">
+      <div class="modal__close" data-close>&times;</div>
+      <div class="modal__title">${message}</div>
+    </div>
+  `;
+  document.querySelector('.modal').append(thanksModal);
+
+  setTimeout(() => {
+    thanksModal.remove();
+    prevModalDialog.classList.add('show');
+    prevModalDialog.classList.remove('hide');
+    closeModal();
+  }, 4000);
+}
 
 
 
 
 
+
+
+});
 
 
