@@ -1647,7 +1647,9 @@ document.addEventListener('DOMContentLoaded', () => {
       prevModalDialog.classList.remove('hide');
       closeModal();
     }, 4000);
-  } // Fetch API
+  }
+
+  fetch('http://localhost:3000/menu').then(data => data.json()).then(result => console.log(result)); // Fetch API
   // fetch('https://jsonplaceholder.typicode.com/posts', {
   //   method: 'POST',
   //   body: JSON.stringify({name: 'Chertila'}),
@@ -1657,7 +1659,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // })
   //   .then(response => response.json())
   //   .then(json => console.log(json));
-
 });
 
 /***/ })

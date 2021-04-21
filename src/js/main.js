@@ -247,6 +247,11 @@ function showThanksModal (message) {
 }
 
 
+fetch('http://localhost:3000/menu')
+  .then(data => data.json())
+  .then(result => console.log(result));
+
+
 // Fetch API
 
 
