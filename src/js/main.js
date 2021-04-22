@@ -138,21 +138,28 @@ class MenuCard {
 
 // Функция получения данных с сервера
 
-const getResource = async (url) => {
-  const result = await fetch(url);
+// const getResource = async (url) => {
+//   const result = await fetch(url);
 
-  if (!result.ok) {
-    throw new Error(`Could not fetch ${url}, status ${result.status}`);
-  }
+//   if (!result.ok) {
+//     throw new Error(`Could not fetch ${url}, status ${result.status}`);
+//   }
 
-  return await result.json();
-};
+//   return await result.json();
+// };
 
 // Получаем данные карт с сервера
 
-getResource('http://localhost:3000/menu')
+// getResource('http://localhost:3000/menu')
+//   .then(data => {
+//     data.forEach(({img, altimg, title, descr, price}) => {
+//       new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+//     });
+//   });
+
+axios.get('http://localhost:3000/menu')
   .then(data => {
-    data.forEach(({img, altimg, title, descr, price}) => {
+    data.data.forEach(({img, altimg, title, descr, price}) => {
       new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
     });
   });

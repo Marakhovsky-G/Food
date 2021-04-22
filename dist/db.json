@@ -1,4 +1,10 @@
 {
+  "__comment": [
+    {
+      "some-comment":"json-server --watch db.json",
+      "some-key-value":"some-value"
+    }
+  ],
   "menu": [
     {
       "img": "img/tabs/vegy.jpg",
