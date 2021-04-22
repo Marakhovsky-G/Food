@@ -325,12 +325,16 @@ function getDot() {
   dotsArray[slideIndex - 1].style.opacity = '1';
 }
 
+function onlyNumber(string) {
+  return +string.replace(/\D/g, '');
+}
+
 
 prevButton.addEventListener('click', () => {
   if (offset == 0) {
-    offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+    offset = onlyNumber(width) * (slides.length - 1);
   } else {
-    offset -= +width.slice(0, width.length - 2);
+    offset -= onlyNumber(width);
   }
 
   slidesField.style.transform = `translateX(-${offset}px)`;
@@ -347,10 +351,10 @@ prevButton.addEventListener('click', () => {
 
 
 nextButton.addEventListener('click', () => {
-  if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+  if (offset == onlyNumber(width) * (slides.length - 1)) {
     offset = 0;
   } else {
-    offset += +width.slice(0, width.length - 2);
+    offset += onlyNumber(width);
   }
 
   slidesField.style.transform = `translateX(-${offset}px)`;
@@ -372,7 +376,7 @@ dotsArray.forEach(dot => {
 
     slideIndex = slideTo;
 
-    offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+    offset = onlyNumber(width) * (slideTo - 1);
     slidesField.style.transform = `translateX(-${offset}px)`;
 
     getCurrent();
