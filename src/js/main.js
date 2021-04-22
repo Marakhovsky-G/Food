@@ -258,6 +258,58 @@ fetch('http://localhost:3000/menu')
 
 
 
+// Слайдер
+
+
+const slides = document.querySelectorAll('.offer__slide'),
+      prevButton = document.querySelector('.offer__slider-prev'),
+      nextButton = document.querySelector('.offer__slider-next'),
+      total = document.querySelector('#total'),
+      current = document.querySelector('#current');
+
+let slideIndex = 1;
+
+function showSlide(i) {
+  if (i > slides.length) {
+    slideIndex = 1;
+  }
+
+  if (i < 1) {
+    slideIndex = slides.length;
+  }
+
+  slides.forEach(item => item.classList.add('hide'));
+  slides[slideIndex - 1].classList.remove('hide');
+  slides[slideIndex - 1].classList.add('show');
+
+  if (slides.length < 10) {
+    current.textContent = `0${slideIndex}`;
+  } else {
+    current.textContent = slideIndex;
+  }
+}
+showSlide(slideIndex);
+
+if (slides.length < 10) {
+  total.textContent = `0${slides.length}`;
+} else {
+  total.textContent = slides.length;
+}
+
+function plusSlides(i) {
+  showSlide(slideIndex += i);
+}
+
+prevButton.addEventListener('click', () => {
+  plusSlides(-1);
+});
+
+nextButton.addEventListener('click', () => {
+  plusSlides(+1);
+});
+
+
+
 
 // Fetch API
 
