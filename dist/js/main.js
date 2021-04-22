@@ -262,6 +262,7 @@ function showThanksModal (message) {
 
 
 const slides = document.querySelectorAll('.offer__slide'),
+      slider = document.querySelector('.offer__slider'),
       prevButton = document.querySelector('.offer__slider-prev'),
       nextButton = document.querySelector('.offer__slider-next'),
       total = document.querySelector('#total'),
@@ -292,6 +293,38 @@ slides.forEach(item => {
   item.style.width = width;
 });
 
+slider.style.position = 'relative';
+
+const dots = document.createElement('ol'),
+      dotsArray = [];
+
+dots.classList.add('carousel-dots');
+slider.append(dots);
+
+for (let i = 0; i < slides.length; i++) {
+  const dot = document.createElement('li');
+  dot.setAttribute('data-slide-to', i + 1);
+  dot.classList.add('dot');
+  if (i == 0) {
+    dot.style.opacity = 1;
+  }
+  dots.append(dot);
+  dotsArray.push(dot);
+}
+
+function getCurrent() {
+  if (slides.length < 10) {
+    current.textContent = `0${slideIndex}`;
+  } else {
+    current.textContent = slideIndex;
+  }
+}
+
+function getDot() {
+  dotsArray.forEach(dot => dot.style.opacity = '0.5');
+  dotsArray[slideIndex - 1].style.opacity = '1';
+}
+
 
 prevButton.addEventListener('click', () => {
   if (offset == 0) {
@@ -308,11 +341,8 @@ prevButton.addEventListener('click', () => {
     slideIndex--;
   }
 
-  if (slides.length < 10) {
-    current.textContent = `0${slideIndex}`;
-  } else {
-    current.textContent = slideIndex;
-  }
+  getCurrent();
+  getDot();
 });
 
 
@@ -331,11 +361,23 @@ nextButton.addEventListener('click', () => {
     slideIndex++;
   }
 
-  if (slides.length < 10) {
-    current.textContent = `0${slideIndex}`;
-  } else {
-    current.textContent = slideIndex;
-  }
+  getCurrent();
+  getDot();
+});
+
+
+dotsArray.forEach(dot => {
+  dot.addEventListener('click', (evt) => {
+    const slideTo = evt.target.getAttribute('data-slide-to');
+
+    slideIndex = slideTo;
+
+    offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+    slidesField.style.transform = `translateX(-${offset}px)`;
+
+    getCurrent();
+    getDot();
+  });
 });
 
 
