@@ -1,17 +1,17 @@
-function slider() {
+function slider({container, slide, nextArrow, prevArrow, totalCounter, currentCounter, wrapper, field}) {
 
   // Слайдер каруселью
 
 
-  const slides = document.querySelectorAll('.offer__slide'),
-  slider = document.querySelector('.offer__slider'),
-  prevButton = document.querySelector('.offer__slider-prev'),
-  nextButton = document.querySelector('.offer__slider-next'),
-  total = document.querySelector('#total'),
-  current = document.querySelector('#current'),
-  slidesWrapper = document.querySelector('.offer__slider-wrapper'),
-  slidesField = document.querySelector('.offer__slider-inner'),
-  width = window.getComputedStyle(slidesWrapper).width;
+  const slides = document.querySelectorAll(slide),
+        slider = document.querySelector(container),
+        prevButton = document.querySelector(prevArrow),
+        nextButton = document.querySelector(nextArrow),
+        total = document.querySelector(totalCounter),
+        current = document.querySelector(currentCounter),
+        slidesWrapper = document.querySelector(wrapper),
+        slidesField = document.querySelector(field),
+        width = window.getComputedStyle(slidesWrapper).width;
 
   let slideIndex = 1;
   let offset = 0;
@@ -128,4 +128,4 @@ function slider() {
 
 }
 
-module.exports = slider;
+export default slider;
