@@ -1,8 +1,8 @@
 {
   "__comment": [
     {
-      "some-comment":"json-server --watch db.json",
-      "some-key-value":"some-value"
+      "some-comment": "json-server --watch db.json",
+      "some-key-value": "some-value"
     }
   ],
   "menu": [
@@ -48,6 +48,11 @@
       "name": "Bvz",
       "phone": "324 23423",
       "id": 4
+    },
+    {
+      "name": "sdf",
+      "phone": "32423",
+      "id": 5
     }
   ]
 }
