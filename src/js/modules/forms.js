@@ -48,7 +48,6 @@ function forms(formSelector, modalTimerId) {
         .finally(() => {
           form.reset();
         });
-
     });
   }
 
