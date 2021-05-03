@@ -49,7 +49,7 @@ function cards() {
 
   // Получаем данные карт с сервера
 
-  getResource('db.json')
+  getResource('dist/db.json')
     .then(data => data.menu)
     .then(data => {
       data.forEach(({img, altimg, title, descr, price}) => {
