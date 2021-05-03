@@ -2108,7 +2108,7 @@ function cards() {
   } // Получаем данные карт с сервера
 
 
-  Object(_services_services__WEBPACK_IMPORTED_MODULE_0__["getResource"])('dist/db.json').then(data => data.menu).then(data => {
+  Object(_services_services__WEBPACK_IMPORTED_MODULE_0__["getResource"])('db.json').then(data => data.menu).then(data => {
     data.forEach(({
       img,
       altimg,
