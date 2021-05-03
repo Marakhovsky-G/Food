@@ -2104,7 +2104,7 @@ function cards() {
   } // Получаем данные карт с сервера
 
 
-  Object(_services_services__WEBPACK_IMPORTED_MODULE_0__["getResource"])('http://localhost:3000/menu').then(data => {
+  Object(_services_services__WEBPACK_IMPORTED_MODULE_0__["getResource"])('db.json').then(data => data.menu).then(data => {
     data.forEach(({
       img,
       altimg,
@@ -2160,7 +2160,7 @@ function forms(formSelector, modalTimerId) {
       const formData = new FormData(form);
       const json = JSON.stringify(Object.fromEntries(formData.entries())); // Переврдим данные формы в json
 
-      Object(_services_services__WEBPACK_IMPORTED_MODULE_1__["postData"])('http://localhost:3000/requests', json).then(data => {
+      Object(_services_services__WEBPACK_IMPORTED_MODULE_1__["postData"])('https://jsonplaceholder.typicode.com/posts', json).then(data => {
         console.log(data);
         showThanksModal(message.success);
         statusMessage.remove();

@@ -49,7 +49,8 @@ function cards() {
 
   // Получаем данные карт с сервера
 
-  getResource('http://localhost:3000/menu')
+  getResource('db.json')
+    .then(data => data.menu)
     .then(data => {
       data.forEach(({img, altimg, title, descr, price}) => {
         new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
